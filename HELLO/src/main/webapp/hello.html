@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Random String Generator</title>
+</head>
+
+<body style="
+    font-size: x-large;
+    text-align: center;
+">
+	<h1>암호생성기</h1>
+	<p>생성된 랜덤 문자 : </p>
+	<p id="randomString">el3b685SiN</p>
+
+	<script>
+		var length = 10;
+		var characters = "가나다라마바사아자차카타파하ㄲㄸㅃㅆㅉㄱㄴㄷㄹㅁㅂㅅㅇㅎㅈㅊㅍㅏㅑㅓㅕㅗㅛㅜㅣㅟㅢㅒㅖABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+		var randomString = "";
+
+		for (var i = 0; i < length; i++) {
+			var randomIndex = Math.floor(Math.random() * characters.length);
+			var randomChar = characters.charAt(randomIndex);
+			randomString += randomChar;
+		}
+
+		document.getElementById("randomString").textContent = randomString;
+
+	</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>회원가입</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f0f0f0;
+			margin: 0;
+			padding: 0;
+		}
+
+		.container {
+			max-width: 400px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		h1 {
+			text-align: center;
+		}
+
+		input[type="text"],
+		input[type="password"],
+		input[type="number"] {
+			width: 90%;
+			padding: 10px;
+			margin: 5px 0;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+		}
+
+		input[type="button"] {
+			background-color: #0074d9;
+			color: #fff;
+			padding: 10px;
+			border: none;
+			border-radius: 3px;
+			width: 100%;
+			cursor: pointer;
+		}
+
+		input[type="button"]:hover {
+			background-color: #0056b3;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>회원가입</h1>
+		<div>
+			아이디: <input type="text" id="ID" name="" placeholder="ID"><br>
+			비밀번호: <input type="password" id="PASS" name="" placeholder="Password"><br>
+			비밀번호 확인: <input type="password" id="CHECK" name="" placeholder="Password Check"><br>
+			이름: <input type="text" id="NAME" name="" placeholder="Name"><br>
+			전화번호: <input type="number" id="NUM" name="" placeholder="PhoneNumber"><br>
+			<input type="button" id="BTN" name="" value="확인">
+		</div>
+		<script>
+			document.getElementById("BTN")
+				.addEventListener("click", function () {
+					let ID = document.getElementById("ID").value;
+					let trimID = ID.trim();
+
+					let PASS = document.getElementById("PASS").value;
+					let trimPASS = PASS.trim();
+
+					let CHECK = document.getElementById("CHECK").value;
+					let trimCHECK = CHECK.trim();
+
+					let NAME = document.getElementById("NAME").value;
+					let trimNAME = NAME.trim();
+
+					let NUM = document.getElementById("NUM").value;
+					let trimNUM = NUM.trim();
+
+					if (trimID == "") {
+						alert("아이디를 입력하시오.");
+					} else if (trimPASS == "") {
+						alert("비밀번호를 입력하시오.");
+					} else if (trimCHECK == "") {
+						alert("비밀번호 확인을 해주세요.");
+					} else if (trimNAME == "") {
+						alert("이름을 입력하시오.");
+					} else if (trimNUM == "") {
+						alert("전화번호를 입력하시오.");
+					} else if (trimPASS != trimCHECK) {
+						alert("입력하신 비밀번호가 다릅니다.")
+					}
+				})
+		</script>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+/* 에러 메시지 스타일 */
+.error-message {
+    color: red;
+    display: none; /* 초기에는 숨깁니다. */
+}
+
+/* 빨간색 불빛 효과 */
+.error-light {
+    background-color: red;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    animation: error-light 0.5s ease-in-out;
+}
+
+@keyframes error-light {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
