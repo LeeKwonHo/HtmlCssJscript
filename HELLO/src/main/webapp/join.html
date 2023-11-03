@@ -28,7 +28,8 @@
 
 		input[type="text"],
 		input[type="password"],
-		input[type="number"] {
+		input[type="number"],
+		input[type="area"] {
 			width: 90%;
 			padding: 10px;
 			margin: 5px 0;
@@ -61,40 +62,80 @@
 			비밀번호 확인: <input type="password" id="CHECK" name="" placeholder="Password Check"><br>
 			이름: <input type="text" id="NAME" name="" placeholder="Name"><br>
 			전화번호: <input type="number" id="NUM" name="" placeholder="PhoneNumber"><br>
+			성별: <input type="radio" id="" name="sex" value="male">남성
+			<input type="radio" id="" name="sex" value="female">여성<br>
+			<input type="checkbox" id="DEV" name="hobby" value="DEV">개발<br>
+			<input type="checkbox" id="SPT" name="hobby" value="SPT">운동<br>
+			<input type="checkbox" id="ART" name="hobby" value="ART">예술<br>
+			<input type="checkbox" id="AllCheck" name="hobby" value="SelectAll">전체선택<br>
+
+			거주지:
+			<select id="selectCON">
+				<option value="ROK">대한민국</option>
+				<option value="GANA">가나</option>
+				<option value="AFC">아프리카</option>
+				<option value="STR" selected>별나라</option>
+				<option value="CAT">고양이나라</option>
+			</select><br>
+			<textarea id="area" placeholder="Contents">	</textarea>
+
 			<input type="button" id="BTN" name="" value="확인">
 		</div>
+
 		<script>
-			document.getElementById("BTN")
-				.addEventListener("click", function () {
-					let ID = document.getElementById("ID").value;
-					let trimID = ID.trim();
+			const allCheck = document.getElementById("AllCheck");
+			const checkboxes = document.querySelectorAll('input[name="hobby"]');
+			const btn = document.getElementById("BTN");
 
-					let PASS = document.getElementById("PASS").value;
-					let trimPASS = PASS.trim();
+			allCheck.addEventListener("click", function () {
+				checkboxes.forEach((checkbox) => {
+					checkbox.checked = allCheck.checked;
+				});
+			});
 
-					let CHECK = document.getElementById("CHECK").value;
-					let trimCHECK = CHECK.trim();
-
-					let NAME = document.getElementById("NAME").value;
-					let trimNAME = NAME.trim();
-
-					let NUM = document.getElementById("NUM").value;
-					let trimNUM = NUM.trim();
-
-					if (trimID == "") {
-						alert("아이디를 입력하시오.");
-					} else if (trimPASS == "") {
-						alert("비밀번호를 입력하시오.");
-					} else if (trimCHECK == "") {
-						alert("비밀번호 확인을 해주세요.");
-					} else if (trimNAME == "") {
-						alert("이름을 입력하시오.");
-					} else if (trimNUM == "") {
-						alert("전화번호를 입력하시오.");
-					} else if (trimPASS != trimCHECK) {
-						alert("입력하신 비밀번호가 다릅니다.")
+			checkboxes.forEach((checkbox) => {
+				checkbox.addEventListener("change", function () {
+					if ([...checkboxes].every(checkbox => checkbox.checked)) {
+						allCheck.checked = true;
+					} else {
+						allCheck.checked = false;
 					}
-				})
+				});
+			});
+
+			btn.addEventListener("click", function () {
+				let ID = document.getElementById("ID").value;
+				let trimID = ID.trim();
+
+				let PASS = document.getElementById("PASS").value;
+				let trimPASS = PASS.trim();
+
+				let CHECK = document.getElementById("CHECK").value;
+				let trimCHECK = CHECK.trim();
+
+				let NAME = document.getElementById("NAME").value;
+				let trimNAME = NAME.trim();
+
+				let NUM = document.getElementById("NUM").value;
+				let trimNUM = NUM.trim();
+
+				if (trimID == "") {
+					alert("아이디를 입력하시오.");
+				} else if (trimPASS == "") {
+					alert("비밀번호를 입력하시오.");
+				} else if (trimCHECK == "") {
+					alert("비밀번호 확인을 해주세요.");
+				} else if (trimNAME == "") {
+					alert("이름을 입력하시오.");
+				} else if (trimNUM == "") {
+					alert("전화번호를 입력하시오.");
+				} else if (trimPASS != trimCHECK) {
+					alert("비밀번호 불일치");
+				} else alert("가입 성공");
+
+				let Area = document.getElementById("selectCON").value;
+				console.log(Area);
+			});
 		</script>
 	</div>
 </body>
