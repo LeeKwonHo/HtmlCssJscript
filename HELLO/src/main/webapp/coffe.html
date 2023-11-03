@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>커피 키오스크</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f0f0f0;
+			margin: 0;
+			padding: 0;
+		}
+
+		.container {
+			max-width: 400px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		h1 {
+			text-align: center;
+		}
+
+		.menu-item {
+			display: flex;
+			justify-content: space-between;
+			margin: 10px 0;
+		}
+
+		.menu-item label {
+			font-weight: bold;
+		}
+
+		.menu-item select {
+			width: 70%;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+		}
+
+		.order-button {
+			background-color: #0074d9;
+			color: #fff;
+			padding: 10px;
+			border: none;
+			border-radius: 3px;
+			width: 100%;
+			cursor: pointer;
+		}
+
+		.order-button:hover {
+			background-color: #0056b3;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>커피 주문</h1>
+		<div class="menu-item">
+			<label for="coffee-type">커피 종류:</label>
+			<select id="coffee-type">
+				<option value="3000">아메리카노</option>
+				<option value="3500">라떼</option>
+				<option value="4000">카푸치노</option>
+			</select>
+		</div>
+
+		<div class="menu-item">
+			<label for="size">크기:</label>
+			<select id="size">
+				<option value="0">Small</option>
+				<option value="500">Medium</option>
+				<option value="1000">Large</option>
+			</select>
+		</div>
+
+		<div class="menu-item">
+			<label for="sugar">설탕 양:</label>
+			<select id="sugar">
+				<option value="0">없음</option>
+				<option value="0">적게</option>
+				<option value="0">많이</option>
+			</select>
+		</div>
+
+		<button class="order-button" onclick="placeOrder()">주문</button>
+
+		<div id="order-summary" style="display: none;">
+			<h2>주문 내역</h2>
+			<p>커피 종류: <span id="selected-coffee"></span></p>
+			<p>크기: <span id="selected-size"></span></p>
+			<p>설탕 양: <span id="selected-sugar"></span></p>
+			<p>가격: <span id="total-price"></span> 원</p>
+		</div>
+	</div>
+
+	<script>
+		function placeOrder() {
+			const coffeeTypeSelect = document.getElementById("coffee-type");
+			const sizeSelect = document.getElementById("size");
+			const sugarSelect = document.getElementById("sugar");
+			
+			const selectedCoffee = coffeeTypeSelect.options[coffeeTypeSelect.selectedIndex].text;
+			const selectedSize = sizeSelect.options[sizeSelect.selectedIndex].text;
+			const selectedSugar = sugarSelect.options[sugarSelect.selectedIndex].text;
+			
+			const coffeePrice = parseFloat(coffeeTypeSelect.value);
+			const sizePriceIncrement = parseFloat(sizeSelect.value);
+			const totalPrice = coffeePrice + sizePriceIncrement;
+
+			document.getElementById("selected-coffee").textContent = selectedCoffee;
+			document.getElementById("selected-size").textContent = selectedSize;
+			document.getElementById("selected-sugar").textContent = selectedSugar;
+			document.getElementById("total-price").textContent = totalPrice;
+
+			document.getElementById("order-summary").style.display = "block";
+		}
+	</script>
+</body>
+
+</html>
