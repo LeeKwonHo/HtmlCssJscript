@@ -22,7 +22,7 @@
 </head>
 
 <body>
-	<canvas id="myCanvas" width="1600" height="800"></canvas>
+	<canvas id="myCanvas" width="2100" height="1000"></canvas>
 
 	<script>
 		//백그라운드
@@ -31,29 +31,29 @@
 		//점수 변수
 		var score = 0;
 		//공 크기
-		var ballRadius = 5;
+		var ballRadius = 3;
 		var ballColor = "#0095DD";
-		//맵 크기
-		var x = canvas.width / 2;
-		var y = canvas.height - 30;
+		//발사지점
+		var x = canvas.width / 100;
+		var y = canvas.height - 100;
 		//공의 속도
-		var dx = 3;
-		var dy = -3;
+		var dx = 1;
+		var dy = -1;
 		//받침대 크기
 		var paddleHeight = 5;
-		var paddleWidth = 1600;
+		var paddleWidth = 150;
 		var paddleX = (canvas.width - paddleWidth) / 2;
 		//키보드 변수
 		var rightPressed = false;
 		var leftPressed = false;
 		//벽돌 변수
-		var brickRowCount = 35;
-		var brickColumnCount = 45;
-		var brickWidth = 30;
-		var brickHeight = 7;
-		var brickPadding = 5;
+		var brickRowCount = 70;
+		var brickColumnCount = 108;
+		var brickWidth = 15;
+		var brickHeight = 4;
+		var brickPadding = 4;
 		var brickOffsetTop = 24;
-		var brickOffsetLeft = 15;
+		var brickOffsetLeft = 23;
 
 		var bricks = [];
 		for (var c = 0; c < brickColumnCount; c++) {
@@ -113,7 +113,7 @@
 							ballColor = randomColor;
 
 							// 계산된 각도로 반사
-							var brickCenterX = b.x + brickWidth / 2;
+							var brickCenterX = b.x + brickWidth / 2.;
 							var angle = Math.atan2(y - (b.y + brickHeight / 2), x - brickCenterX);
 							dx = Math.cos(angle);
 							dy = Math.sin(angle);
@@ -211,10 +211,10 @@
 			}
 
 			if (rightPressed && paddleX < canvas.width - paddleWidth) {
-				paddleX += 6;
+				paddleX += 4;
 			}
 			else if (leftPressed && paddleX > 0) {
-				paddleX -= 6;
+				paddleX -= 4;
 			}
 
 			x += dx;
