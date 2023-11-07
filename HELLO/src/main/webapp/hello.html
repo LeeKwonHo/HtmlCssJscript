@@ -4,6 +4,9 @@
 <head>
 	<meta charset="utf-8">
 	<title>Random String Generator</title>
+
+	<script src="http://127.0.0.1/jquery-3.7.1.min.js"></script>
+
 </head>
 
 <body style="
@@ -13,6 +16,82 @@
 	<h1>암호생성기</h1>
 	<p>생성된 랜덤 문자 : </p>
 	<p id="randomString">el3b685SiN</p>
+
+
+
+
+
+
+
+
+
+
+
+
+	<div id="display" style="
+	background-color: black;
+	 height: 300px;
+	  width: 300px;
+	  margin: auto;
+	  color: white;
+	  overflow: scroll;">
+		<h1>text test</h1>
+	</div>
+
+	<div id="component">
+		<input type="text" id="inText">
+	</div>
+
+	<div id="menu">
+		<input type="button" id="btn" value="확인">
+		<input type="button" id="topbtn" value="맨 위로">
+	</div>
+	<script>
+
+
+		$('#btn').on('click', function () {
+			$('#display').append($('#inText').val());
+			$('#display').append('<br>');
+			$('#inText').val('');
+			$('#inText').focus();
+
+			const $display = $('#display');
+			$display.scrollTop($display[0].scrollHeight);
+
+		});
+
+		$('#inText').on('keyup', function (key) {
+			if (key.keyCode == 13) {
+				$('#display').append($('#inText').val());
+				$('#display').append('<br>');
+				$('#inText').val('');
+				$('#inText').focus();
+
+
+				const $display = $('#display');
+				$display.scrollTop($display[0].scrollHeight);
+			}
+		});
+
+		$('#topbtn').on('click', function () {
+			$('#display').scrollTop(0);
+		});
+	</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<script>
 		var length = 10;

@@ -5,7 +5,7 @@
 
 	<meta charset="utf-8">
 
-	<title>Game Canvas Workshop</title>
+	<title>벽돌깨기 좀 많이</title>
 
 	<style>
 		* {
@@ -34,14 +34,14 @@
 		var ballRadius = 3;
 		var ballColor = "#0095DD";
 		//발사지점
-		var x = canvas.width / 100;
-		var y = canvas.height - 100;
+		var x = Math.random() * (canvas.width - 2 * ballRadius) + ballRadius;
+		var y = canvas.height - 10;
 		//공의 속도
 		var dx = 1;
 		var dy = -1;
 		//받침대 크기
 		var paddleHeight = 5;
-		var paddleWidth = 150;
+		var paddleWidth = 150000;
 		var paddleX = (canvas.width - paddleWidth) / 2;
 		//키보드 변수
 		var rightPressed = false;
