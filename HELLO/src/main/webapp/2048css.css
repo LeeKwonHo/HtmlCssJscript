@@ -52,7 +52,7 @@ body {
 #scoreType {
 	font-size: 14pt;
 	margin: 0px;
-	color: #715541;
+	color: rgb(255, 255, 128);
 }
 
 #score {
