@@ -6,16 +6,17 @@ var score = 0;
 //공 크기
 var ballRadius = 3;
 var ballColor = "#0095DD";
-//발사지점
+//공 시작지점
 var x = Math.random() * (canvas.width - 2 * ballRadius) + ballRadius;
 var y = canvas.height - 10;
 //공의 속도
-var dx = 1;
-var dy = -1;
+var dx = 1;//1
+var dy = -1;//1
 //받침대 크기
 var paddleHeight = 5;
 var paddleWidth = 150;
 var paddleX = (canvas.width - paddleWidth) / 2;
+var paddleColor = "#0095DD";
 //키보드 변수
 var rightPressed = false;
 var leftPressed = false;
@@ -56,21 +57,8 @@ function keyUpHandler(e) {
 		leftPressed = false;
 	}
 }
-//벽돌 생성 및 랜덤색상
-function createBricks() {
-	for (var c = 0; c < brickColumnCount; c++) {
-		bricks[c] = [];
-		for (var r = 0; r < brickRowCount; r++) {
-			bricks[c][r] = {
-				x: 0, y: 0
-				, status: 1
-				, color: getRandomColor()
-			};
-		}
-	}
-}
 
-// 충돌 감지 및 공의 궤도 변경
+//충돌 계산
 function collisionDetection() {
 	var hasBricksLeft = false;
 	for (var c = 0; c < brickColumnCount; c++) {
@@ -90,30 +78,16 @@ function collisionDetection() {
 					ballColor = randomColor;
 
 					// 계산된 각도로 반사
-					var brickCenterX = b.x + brickWidth / 2.;
+					var brickCenterX = b.x + brickWidth / 2;
 					var angle = Math.atan2(y - (b.y + brickHeight / 2), x - brickCenterX);
-					dx = Math.cos(angle);
-					dy = Math.sin(angle);
+					dx = 2 * Math.cos(angle);
+					dy = 2 * Math.sin(angle);
 					b.status = 0;
 					score++;
 
-					if (y + dy > canvas.height - ballRadius) {
-						if (x > paddleX && x < paddleX + paddleWidth) {
-							var paddleCenterX = paddleX + paddleWidth / 2;
-							var deviation = x - paddleCenterX;
-							var angle = (deviation / (paddleWidth / 2)) * (Math.PI / 3); // 최대 60도로 제한
-							dx = Math.sin(angle);
-							dy = -Math.cos(angle);
-						}
-					}
 
 				}
 			}
-		}
-		if (!hasBricksLeft) {
-			alert("OK~ Let's GO!");
-			createBricks();
-			drawBricks(); // 새로운 벽돌 생성
 		}
 	}
 
@@ -124,12 +98,17 @@ function collisionDetection() {
 			var paddleCenterX = paddleX + paddleWidth / 2;
 			var deviation = x - paddleCenterX;
 			var angle = (deviation / (paddleWidth / 2)) * (Math.PI / 3); // 최대 60도로 제한
-			dx = Math.sin(angle);
-			dy = -Math.cos(angle);
+			dx = 2 * Math.sin(angle);
+			dy = -2 * Math.cos(angle);
 		}
 	}
-}
 
+	if (!hasBricksLeft) {
+		alert("OK~ Let's GO!");
+		createBricks();
+		drawBricks(); // 새로운 벽돌 생성
+	}
+}
 
 //점수 표시
 function drawScore() {
@@ -149,7 +128,7 @@ function drawBall() {
 function drawPaddle() {
 	ctx.beginPath();
 	ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-	ctx.fillStyle = "#0095DD";
+	ctx.fillStyle = paddleColor;
 	ctx.fill();
 	ctx.closePath();
 }
@@ -194,7 +173,7 @@ function draw() {
 			}
 		}
 		else {
-			alert("GAME OVER");
+			alert("You Loser");
 			document.location.reload();
 			clearInterval(interval);
 		}
@@ -215,9 +194,19 @@ function getRandomColor() {
 	var r = Math.floor(Math.random() * 256);
 	var g = Math.floor(Math.random() * 256);
 	var b = Math.floor(Math.random() * 256);
-	return "rgb(" + r + "," + g + "," + b + ")";
+	var randomColor = "rgb(" + r + "," + g + "," + b + ")";
+
+	// 랜덤 색상이 캔버스 배경색과 겹치는 경우 다른 색상으로 변경
+	while (randomColor === "#eee") {
+		r = Math.floor(Math.random() * 256);
+		g = Math.floor(Math.random() * 256);
+		b = Math.floor(Math.random() * 256);
+		randomColor = "rgb(" + r + "," + g + "," + b + ")";
+	}
+
+	return randomColor;
 }
 
 //공의 속도
-var interval = setInterval(draw, 10);
+var interval = setInterval(draw, 1);
 

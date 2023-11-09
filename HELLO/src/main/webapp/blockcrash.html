@@ -3,7 +3,9 @@
 
 <head>
 	<canvas id="myCanvas" width="1900" height="900"></canvas>
+
 	<script src="blockcrash.js"></script>
+
 
 	<meta charset="utf-8">
 
@@ -26,15 +28,20 @@
 
 	<button id="StartButton">게임 시작</button>
 	<button id="PauseButton">일시 정지</button>
+	<button id="HardModeButton">.</button>
 
 	<script>
 
 		clearInterval(interval);
+		var gameStart = false;
 		var gamePaused = false;
 
 		document.getElementById("StartButton").addEventListener("click", function () {
-			if (!gamePaused) {
+			if (!gameStart) {
 				interval = setInterval(draw, 10);
+				gameStart = true;
+				//보통난이도
+				draw();
 			}
 		});
 
@@ -47,6 +54,66 @@
 				clearInterval(interval);
 			}
 		});
+
+
+
+		document.getElementById("HardModeButton").addEventListener("click", function () {
+			if (gameStart) {
+				alert("OK, Let's Go HardMode")
+				clearInterval(interval);
+				interval = setInterval(draw, 1);
+				//하드하게 
+				dx = 2;
+				dy = -2;
+				ballRadius = 2;
+
+				paddleHeight = 3;
+				paddleWidth = 50;
+
+				drawPaddle = drawPaddleHARD;
+				drawBricks = drawBricksHARD;
+				drawBall = drawBallHARD;
+
+			}
+		});
+
+		function drawPaddleHARD() {
+			ctx.beginPath();
+			ctx.rect(paddleX, canvas.height - (paddleHeight * 2), paddleWidth, paddleHeight);
+			let randomColor = getRandomColor();
+			ctx.fillStyle = randomColor;
+			ctx.fill();
+			ctx.closePath();
+
+		}
+
+		function drawBricksHARD() {
+			for (var c = 0; c < brickColumnCount; c++) {
+				for (var r = 0; r < brickRowCount; r++) {
+					if (bricks[c][r].status == 1) {
+						var brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+						var brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+						bricks[c][r].x = brickX;
+						bricks[c][r].y = brickY;
+						ctx.beginPath();
+						ctx.rect(brickX, brickY, brickWidth, brickHeight);
+						let randomColor = getRandomColor();
+						ctx.fillStyle = randomColor;
+						ctx.fill();
+						ctx.closePath();
+					}
+				}
+			}
+		}
+
+		function drawBallHARD() {
+			ctx.beginPath();
+			ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+			let randomColor = getRandomColor();
+			ctx.fillStyle = randomColor; // 공의 색상 설정
+			ctx.fill();
+			ctx.closePath();
+		}
 
 	</script>
 
