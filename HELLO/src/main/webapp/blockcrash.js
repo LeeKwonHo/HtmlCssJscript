@@ -1,4 +1,4 @@
-//백그라운드
+//캔버스
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 //점수 변수
@@ -6,7 +6,7 @@ var score = 0;
 //공 크기
 var ballRadius = 3;
 var ballColor = "#0095DD";
-//공 시작지점
+//공 시작지점,공의 좌표
 var x = Math.random() * (canvas.width - 2 * ballRadius) + ballRadius;
 var y = canvas.height - 10;
 //공의 속도
@@ -74,12 +74,10 @@ function collisionDetection() {
 				) {
 
 					var randomColor = getRandomColor();
-					// 공의 색상을 변경
 					ballColor = randomColor;
-
 					// 계산된 각도로 반사
 					var brickCenterX = b.x + brickWidth / 2;
-					var angle = Math.atan2(y - (b.y + brickHeight / 2), x - brickCenterX);
+					var angle = Math.atan2(y - (b.y + brickHeight / 2), x - brickCenterX);// /2
 					dx = 2 * Math.cos(angle);
 					dy = 2 * Math.sin(angle);
 					b.status = 0;
@@ -97,7 +95,7 @@ function collisionDetection() {
 			// 패들에서의 충돌 처리
 			var paddleCenterX = paddleX + paddleWidth / 2;
 			var deviation = x - paddleCenterX;
-			var angle = (deviation / (paddleWidth / 2)) * (Math.PI / 3); // 최대 60도로 제한
+			var angle = (deviation / (paddleWidth / 2)) * (Math.PI / 3);
 			dx = 2 * Math.sin(angle);
 			dy = -2 * Math.cos(angle);
 		}
@@ -105,8 +103,17 @@ function collisionDetection() {
 
 	if (!hasBricksLeft) {
 		alert("OK~ Let's GO!");
-		createBricks();
-		drawBricks(); // 새로운 벽돌 생성
+
+		bricks = [];
+		for (var c = 0; c < brickColumnCount; c++) {
+			bricks[c] = [];
+			for (var r = 0; r < brickRowCount; r++) {
+				bricks[c][r] = { x: 0, y: 0, status: 1, color: getRandomColor() };
+			}
+		}
+		drawBricks();
+
+		hasBricksLeft = true;
 	}
 }
 
@@ -120,7 +127,7 @@ function drawScore() {
 function drawBall() {
 	ctx.beginPath();
 	ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-	ctx.fillStyle = ballColor; // 공의 색상 설정
+	ctx.fillStyle = ballColor;
 	ctx.fill();
 	ctx.closePath();
 }
@@ -143,7 +150,6 @@ function drawBricks() {
 				bricks[c][r].y = brickY;
 				ctx.beginPath();
 				ctx.rect(brickX, brickY, brickWidth, brickHeight);
-				//let randomColor = getRandomColor();
 				ctx.fillStyle = bricks[c][r].color;
 				ctx.fill();
 				ctx.closePath();
@@ -196,7 +202,6 @@ function getRandomColor() {
 	var b = Math.floor(Math.random() * 256);
 	var randomColor = "rgb(" + r + "," + g + "," + b + ")";
 
-	// 랜덤 색상이 캔버스 배경색과 겹치는 경우 다른 색상으로 변경
 	while (randomColor === "#eee") {
 		r = Math.floor(Math.random() * 256);
 		g = Math.floor(Math.random() * 256);
@@ -207,6 +212,6 @@ function getRandomColor() {
 	return randomColor;
 }
 
-//공의 속도
+//캔버스 그리기
 var interval = setInterval(draw, 1);
 

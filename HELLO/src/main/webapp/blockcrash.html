@@ -28,7 +28,7 @@
 
 	<button id="StartButton">게임 시작</button>
 	<button id="PauseButton">일시 정지</button>
-	<button id="HardModeButton">.</button>
+	<button id="HardModeButton">어려움</button>
 
 	<script>
 
@@ -38,17 +38,31 @@
 
 		document.getElementById("StartButton").addEventListener("click", function () {
 			if (!gameStart) {
-				interval = setInterval(draw, 10);
+				interval = setInterval(draw, 5);
 				gameStart = true;
 				//보통난이도
-				draw();
+				y = canvas.height - 18;
+				ballRadius = 18;
+
+				brickRowCount = 7;
+				brickColumnCount = 9;
+				brickWidth = 195;
+				brickHeight = 60;
+				brickPadding = 10;
+				brickOffsetTop = 24;
+				brickOffsetLeft = 30;
+
+				paddleHeight = 5;
+				paddleWidth = 300;
+
+				drawBricks = drawBricksEASY;
 			}
 		});
 
 		document.getElementById("PauseButton").addEventListener("click", function () {
 			if (gamePaused) {
 				gamePaused = false;
-				interval = setInterval(draw, 10);
+				interval = setInterval(draw, 5);
 			} else {
 				gamePaused = true;
 				clearInterval(interval);
@@ -63,15 +77,25 @@
 				clearInterval(interval);
 				interval = setInterval(draw, 1);
 				//하드하게 
-				dx = 2;
-				dy = -2;
+				x = Math.random() * (canvas.width - 2 * ballRadius) + ballRadius;
+				y = canvas.height - 10;
+
+				dx = 2.25;
+				dy = -2.25;
 				ballRadius = 2;
 
 				paddleHeight = 3;
 				paddleWidth = 50;
 
-				drawPaddle = drawPaddleHARD;
-				drawBricks = drawBricksHARD;
+				brickRowCount = 70;
+				brickColumnCount = 98;
+				brickWidth = 15;
+				brickHeight = 4;
+				brickPadding = 4;
+				brickOffsetTop = 24;
+				brickOffsetLeft = 23;
+
+				drawBricks = drawBricksEASY;
 				drawBall = drawBallHARD;
 
 			}
@@ -113,6 +137,24 @@
 			ctx.fillStyle = randomColor; // 공의 색상 설정
 			ctx.fill();
 			ctx.closePath();
+		}
+
+		function drawBricksEASY() {
+			for (var c = 0; c < brickColumnCount; c++) {
+				for (var r = 0; r < brickRowCount; r++) {
+					if (bricks[c][r].status == 1) {
+						var brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+						var brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+						bricks[c][r].x = brickX;
+						bricks[c][r].y = brickY;
+						ctx.beginPath();
+						ctx.rect(brickX, brickY, brickWidth, brickHeight);
+						ctx.fillStyle = bricks[c][r].color;
+						ctx.fill();
+						ctx.closePath();
+					}
+				}
+			}
 		}
 
 	</script>
