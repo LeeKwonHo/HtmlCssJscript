@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>TEST TEXT</title>
+</head>
+
+<body>
+
+	<h1 style="color: red;">
+		TEST TEXT
+	</h1>
+	<input type="button" id="calcBTN" value="계산기">
+	<input type="button" id="HiBTN" value="안녕">
+
+</body>
+
+<script>
+
+	document.getElementById("calcBTN").addEventListener("click", function () {
+		location.href = "http://localhost/calc.html";
+		alert("OK");
+	});
+
+	document.getElementById("HiBTN").addEventListener("click", function () {
+		alert("안녕");
+	});
+
+</script>
+
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>계산기</title>
+</head>
+
+<body>
+	<form id="calcFRM" action="http://localhost/CalcServlet">
+
+		<input type="number" name="numberOne" id="" placeholder="Num 1"><br>
+		<input type="number" name="numberTwo" id="" placeholder="Num 2"><br>
+		<input type="button" id="CalcBTN" value="확인">
+		<input type="button" id="backBTN" value="돌아가기">
+
+	</form>
+
+	<script>
+
+		document.getElementById("backBTN").addEventListener("click", function () {
+			location.href = "http://localhost/index.html";
+			alert("Get Back!");
+		});
+
+		document.getElementById("CalcBTN").addEventListener("click", function () {
+
+			document.getElementById("calcFRM").submit();
+
+			alert(" ALL Right! No Problems ");
+		});
+
+	</script>
+</body>
+
+
+</html>
