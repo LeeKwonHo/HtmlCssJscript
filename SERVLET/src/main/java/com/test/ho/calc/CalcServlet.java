@@ -20,9 +20,10 @@ public class CalcServlet extends HttpServlet {
 		System.out.println(numOne + ", " + numTwo);
 
 		int result = Integer.parseInt(numOne) + Integer.parseInt(numTwo);
+		String a = String.valueOf(result);
 
 		PrintWriter pw = res.getWriter();
-		pw.write(result);
+		pw.write(a);
 
 		System.out.println(result);
 		System.out.println("CalcServlet");
