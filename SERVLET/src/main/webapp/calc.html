@@ -7,12 +7,16 @@
 </head>
 
 <body>
-	<form id="calcFRM" action="http://localhost/CalcServlet">
+	<form id="calcFRM" method="post" action="http://localhost/CalcServlet">
 
-		<input type="number" name="numberOne" id="" placeholder="Num 1"><br>
-		<input type="number" name="numberTwo" id="" placeholder="Num 2"><br>
-		<input type="button" id="CalcBTN" value="확인">
-		<input type="button" id="backBTN" value="돌아가기">
+		<input type="number" step="0.000001" name="numberOne" id="" placeholder="Num 1"><br>
+		<input type="number" step="0.000001" name="numberTwo" id="" placeholder="Num 2"><br>
+		PLUS<input type="submit" name="operations" id="PlusBTN" value="PLUS"><br><br>
+		MINUS<input type="submit" name="operations" id="MinusBTN" value="MINUS"><br><br>
+		MULTIPLY<input type="submit" name="operations" id="MultiplyBTN" value="MULTIPLY"><br><br>
+		DIVIDE<input type="submit" name="operations" id="DivideBTN" value="DIVIDE"><br><br>
+		REMAIN<input type="submit" name="operations" id="RemainBTN" value="REMAIN"><br><br>
+		<input type="button" name="BackBtn" id="backBTN" value="돌아가기">
 
 	</form>
 
@@ -20,10 +24,38 @@
 
 		document.getElementById("backBTN").addEventListener("click", function () {
 			location.href = "http://localhost/index.html";
-			alert("Get Back!");
+			alert("Go Back!");
 		});
 
-		document.getElementById("CalcBTN").addEventListener("click", function () {
+		document.getElementById("PlusBTN").addEventListener("click", function () {
+
+			document.getElementById("calcFRM").submit();
+
+			alert(" ALL Right! No Problems ");
+		});
+
+		document.getElementById("MinusBTN").addEventListener("click", function () {
+
+			document.getElementById("calcFRM").submit();
+
+			alert(" ALL Right! No Problems ");
+		});
+
+		document.getElementById("MultiplyBTN").addEventListener("click", function () {
+
+			document.getElementById("calcFRM").submit();
+
+			alert(" ALL Right! No Problems ");
+		});
+
+		document.getElementById("DivideBTN").addEventListener("click", function () {
+
+			document.getElementById("calcFRM").submit();
+
+			alert(" ALL Right! No Problems ");
+		});
+
+		document.getElementById("RemainBTN").addEventListener("click", function () {
 
 			document.getElementById("calcFRM").submit();
 
