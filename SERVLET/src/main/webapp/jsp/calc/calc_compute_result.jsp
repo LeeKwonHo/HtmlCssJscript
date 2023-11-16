@@ -24,16 +24,18 @@ String op = (String) request.getAttribute("op");
 
 <body>
 
-	더하기:
+	Plus:
 	<%=a%><br>
-	빼기:
+	Minus:
 	<%=b%><br>
-	곱하기:
+	Multiply:
 	<%=c%><br>
-	나누기:
+	Divide:
 	<%=d%><br>
-	나머지:
-	<%=e%>
+	Remain:
+	<%=e%><br>
+	Choice Operation:
+	<%=op%>
 
 </body>
 
