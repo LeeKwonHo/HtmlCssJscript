@@ -24,46 +24,32 @@ public class CalcServlet extends HttpServlet {
 		String numTwo = req.getParameter("numberTwo");
 		String op = req.getParameter("operations");
 
-//		PrintWriter pw = res.getWriter();
+		String opResult = null;
 
 		System.out.println(op);
-		String a = Calcurator.getInstance().add(numOne, numTwo);
-		String b = Calcurator.getInstance().minus(numOne, numTwo);
-		String c = Calcurator.getInstance().multiply(numOne, numTwo);
-		String d = Calcurator.getInstance().divide(numOne, numTwo);
-		String e = Calcurator.getInstance().remain(numOne, numTwo);
+		if ("PLUS".equals(op)) {
+			opResult = Calcurator.getInstance().add(numOne, numTwo);
+		}
+		if ("MINUS".equals(op)) {
+			opResult = Calcurator.getInstance().minus(numOne, numTwo);
+		}
+		if ("MULTIPLY".equals(op)) {
+			opResult = Calcurator.getInstance().multiply(numOne, numTwo);
+		}
+		if ("DIVIDE".equals(op)) {
+			opResult = Calcurator.getInstance().divide(numOne, numTwo);
+		}
+		if ("REMAIN".equals(op)) {
+			opResult = Calcurator.getInstance().remain(numOne, numTwo);
+		}
 
-//		if ("PLUS".equals(op)) {
-//			pw.write(numOne + " + " + numTwo + " = " + a + " 입니다.");
-//		} else if ("MINUS".equals(op)) {
-//			pw.write(numOne + " - " + numTwo + " = " + b + " 입니다.");
-//		} else if ("MULTIPLY".equals(op)) {
-//			pw.write(numOne + " * " + numTwo + " = " + c + " 입니다.");
-//		} else if ("DIVIDE".equals(op)) {
-//			pw.write(numOne + " / " + numTwo + " = " + d + " 입니다.");
-//		} else if ("REMAIN".equals(op)) {
-//			pw.write(numOne + " % " + numTwo + " = " + e + " 입니다.");
-//		} else {
-//
-//		}
-
-		req.setAttribute("a", a);
-		req.setAttribute("b", b);
-		req.setAttribute("c", c);
-		req.setAttribute("d", d);
-		req.setAttribute("e", e);
+		req.setAttribute("opResult", opResult);
+		req.setAttribute("numOne", numOne);
+		req.setAttribute("numTwo", numTwo);
 		req.setAttribute("op", op);
 
 		RequestDispatcher dis = req.getRequestDispatcher("/jsp/calc/calc_compute_result.jsp");
 		dis.forward(req, res);
-
-//		pw.write(" <br> <input type=\"button\" name=\"BackBtn\" id=\"backBTN\" value=\"돌아가기\">");
-//		pw.println("<script>");
-//		pw.println("document.getElementById('backBTN').addEventListener('click', function () {");
-//		pw.println("    location.href = 'http://localhost/calc.html';");
-//		pw.println("    alert('Go Back!');");
-//		pw.println("});");
-//		pw.println("</script>");
 
 	}
 

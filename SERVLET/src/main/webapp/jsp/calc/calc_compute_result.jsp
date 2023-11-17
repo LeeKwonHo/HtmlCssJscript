@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-String a = (String) request.getAttribute("a");
-String b = (String) request.getAttribute("b");
-String c = (String) request.getAttribute("c");
-String d = (String) request.getAttribute("d");
-String e = (String) request.getAttribute("e");
+String opResult = (String) request.getAttribute("opResult");
+String numOne = (String) request.getAttribute("numOne");
+String numTwo = (String) request.getAttribute("numTwo");
 String op = (String) request.getAttribute("op");
 %>
 
@@ -23,20 +21,20 @@ String op = (String) request.getAttribute("op");
 
 
 <body>
+	<h1><%=numOne%>
+		<%=op%>
+		<%=numTwo%>
+		=
+		<%=opResult%></h1>
 
-	Plus:
-	<%=a%><br>
-	Minus:
-	<%=b%><br>
-	Multiply:
-	<%=c%><br>
-	Divide:
-	<%=d%><br>
-	Remain:
-	<%=e%><br>
-	Choice Operation:
-	<%=op%>
+	<input type="button" id="backBTN" value="돌아가기">
 
+	<script type="text/javascript">
+		document.getElementById("backBTN").addEventListener("click",
+				function() {
+					location.href = "http://localhost/calc.html";
+				});
+	</script>
 </body>
 
 </html>

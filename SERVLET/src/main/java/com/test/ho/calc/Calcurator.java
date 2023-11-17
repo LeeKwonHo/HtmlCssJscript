@@ -79,6 +79,7 @@ public class Calcurator {
 		return formatResult(sum);
 	}
 
+	// 소수점 지우기
 	private String formatResult(double result) {
 		if (result % 1 == 0) {
 			return String.format("%.0f", result);

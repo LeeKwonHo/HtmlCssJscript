@@ -20,7 +20,7 @@ public class ReqRes {
 	public void setResEcodingType(HttpServletRequest req, HttpServletResponse res) {
 		res.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html; charset=UTF-8");
-		System.out.println(" \" FUCK Yeah Success \" ");
+		System.out.println(" \" REQRES Using \" ");
 	}
 
 }
