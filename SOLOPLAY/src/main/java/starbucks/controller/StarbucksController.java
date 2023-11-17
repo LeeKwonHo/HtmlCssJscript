@@ -13,11 +13,11 @@ public class StarbucksController {
 	public static void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String uri = req.getRequestURI();
 		if ("/starbucks/menu.star".equals(uri)) {
-			req.getRequestDispatcher("/jsp/starbucks/menu.jsp").forward(req, res);
+			req.getRequestDispatcher("/jsp/menu.jsp").forward(req, res);
 		}
 		if ("/starbucks/order.star".equals(uri)) {
 			StarbucksModel.makeFood(req);
-			req.getRequestDispatcher("/jsp/starbucks/order.jsp").forward(req, res);
+			req.getRequestDispatcher("/jsp/order.jsp").forward(req, res);
 		}
 	}
 }
