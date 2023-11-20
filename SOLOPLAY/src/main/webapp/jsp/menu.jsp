@@ -1,12 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>스타벅스</title>
-<link href="http://localhost/css/starbucks.css" rel="stylesheet">
+<link href="<c:url value='/css/starbucks.css'/>" rel="stylesheet">
 </head>
 <body>
+	<div>
+		<ul>
+			<li><a href='<c:url value="http://localhost/"/>'>첫화면으로</a></li>
+		</ul>
+	</div>
 	<div>
 		<span> <img class="menuImg" data-menu="cake" src="http://localhost/images/cake.jpg">
 		</span> <span> <img class="menuImg" data-menu="coffee" src="http://localhost/images/coffee.jpg">

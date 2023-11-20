@@ -21,12 +21,12 @@ public class StarbucksModel {
 			sum = 6000 * Integer.parseInt(amount);
 		}
 
-		DecimalFormat decFormat = new DecimalFormat("###,###");
-		String str = decFormat.format(sum);
+//		DecimalFormat decFormat = new DecimalFormat("###,###");
+//		String str = decFormat.format(sum);
 
 		req.setAttribute("menu", menu);
 		req.setAttribute("amount", Integer.parseInt(amount));
-		req.setAttribute("str", String.valueOf(str));
+		req.setAttribute("sum", sum);
 	}
 
 }
