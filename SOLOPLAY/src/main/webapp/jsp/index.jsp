@@ -23,9 +23,7 @@
 					<input type="button" id="btnLogin" value="로그인">
 				</form>
 			</div>
-			
 		</c:if>
-		
 		<c:if test="${ null ne sessionScope.userName }">
 			<div>
 				<span>${userName }님 </span>
@@ -52,6 +50,11 @@
 					location.href = "<c:url value='/logout.star'/>";
 				});
 			}
+			let getCookie = function(name) {
+				var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+				return value? value[2] : null;
+			};
+			console.log(getCookie('BlackFridayGift'));
 		</script>
 		
 		
