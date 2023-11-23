@@ -19,9 +19,7 @@ public class MainServlet extends HttpServlet {
 	}
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		System.out.println(req.getRequestURL());
 		String uri = req.getRequestURI();
-		
 		if ( -1 < uri.indexOf("/index.star")) {
 			IndexController.service(req, res);
 		}
@@ -32,12 +30,12 @@ public class MainServlet extends HttpServlet {
 			LoginController.service(req, res);
 		}
 		if ( -1 < uri.indexOf("/starbucks/")) {
-			boolean hasSession = IndexModel.checkSession(req);
-			if ( hasSession ) {
-				StarbucksController.service(req, res);
-			} else {
-				res.sendRedirect("/index.star");
-			}
+			StarbucksController.service(req, res);
+//			boolean hasSession = IndexModel.checkSession(req);
+//			if ( hasSession ) {
+//			} else {
+//				res.sendRedirect("/index.star");
+//			}
 		}
 		
 	}
