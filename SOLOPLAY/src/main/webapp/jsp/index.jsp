@@ -11,13 +11,13 @@
 	</head>
 	<body>
 		<div>
-			<h1>스타벅스에 오신걸 환영합니다!</h1>
+			<h1 style="text-align: center;">스타벅스에 오신걸 환영합니다!</h1>
 		</div>
 		<c:if test="${ null eq sessionScope.userName }">
 			<div>
-				<span style="color:red">${msg }</span>
+				<span style="color:red; text-align: center;">${msg }</span>
 			</div>
-			<div>
+			<div style="text-align: center;">
 				<form id="frmLogin" method="post" action="<c:url value='/login.star'/>">
 					<input type="text" name="userId" placeholder="아이디"><br>
 					<input type="text" name="userPw" placeholder="암호"><br>
@@ -26,7 +26,7 @@
 			</div>
 		</c:if>
 		<c:if test="${ null ne sessionScope.userName }">
-			<div>
+			<div style="text-align: center;">
 				<span>${userName }님 </span>
 				<span>
 					<input type="button" id="btnLogout" value="로그아웃">
@@ -34,7 +34,7 @@
 			</div>
 			<div>
 				<ul>
-					<li><a href="<c:url value='/starbucks/menu.star'/>">메뉴</a></li>
+					<li style="text-align: center;"><a href="<c:url value='/starbucks/menu.star'/>">메뉴</a></li>
 				</ul>
 			</div>
 		</c:if>

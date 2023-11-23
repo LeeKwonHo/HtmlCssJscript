@@ -50,9 +50,13 @@ public class AuthFilter implements Filter {
 		}
 
 		if (redirectFlag) {
+
 			((HttpServletResponse) res1).sendRedirect("/index.star");
+
 		} else {
+
 			chain.doFilter(req1, res1);
+
 		}
 	}
 
