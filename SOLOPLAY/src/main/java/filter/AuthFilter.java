@@ -13,56 +13,45 @@ import javax.servlet.http.HttpServletResponse;
 
 import index.model.IndexModel;
 
-public class AuthFilter implements Filter {
+public class AuthFilter implements Filter{
 
 	@Override
 	public void destroy() {
-		System.out.println("필터 제거됨.");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void doFilter(ServletRequest req1, ServletResponse res1, FilterChain chain)
 			throws IOException, ServletException {
-
-		String[] menuArr = { "/starbucks/", "/ediya/" };
-		HttpServletRequest req = (HttpServletRequest) req1;
+		String[] menuArr = {"/starbucks/", "/ediya/"};
+		HttpServletRequest req = (HttpServletRequest)req1;
 		String uri = req.getRequestURI();
 		System.out.println("AuthFilter:" + uri);
-
 		boolean redirectFlag = false;
-
-		for (int i = 0; i < menuArr.length; i++) {
-
+		for ( int i = 0 ; i < menuArr.length ; i++ ) {
 			String authUri = menuArr[i];
-
-			if (uri.startsWith(authUri)) {
-
+			if ( uri.startsWith(authUri) ) {
 				boolean hasSession = IndexModel.checkSession(req);
-
-				if (!hasSession) {
-
+				if ( hasSession ) {
+					break;
+				} else {
 					redirectFlag = true;
-
+					break;
 				}
-
-				break;
 			}
 		}
-
-		if (redirectFlag) {
-
-			((HttpServletResponse) res1).sendRedirect("/index.star");
-
+		if ( redirectFlag ) {
+			((HttpServletResponse)res1).sendRedirect("/index.star");
 		} else {
-
 			chain.doFilter(req1, res1);
-
 		}
 	}
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
-		System.out.println("필터 초기화 됨");
+		// TODO Auto-generated method stub
+		
 	}
 
 }
