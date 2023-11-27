@@ -11,7 +11,11 @@ public class IndexController {
 	public static void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String uri = req.getRequestURI();
 		if ( -1 < uri.indexOf("/index.star") ) {
-			req.getRequestDispatcher("/jsp/index.jsp").forward(req, res);
+			//form submit 로그인
+			//req.getRequestDispatcher("/jsp/index.jsp").forward(req, res);
+			
+			//ajax 로그인
+			req.getRequestDispatcher("/jsp/index_ajax.jsp").forward(req, res);
 		}
 	}
 }

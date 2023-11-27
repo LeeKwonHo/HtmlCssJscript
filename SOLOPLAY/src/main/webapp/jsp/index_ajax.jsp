@@ -8,26 +8,22 @@
 		<meta charset="UTF-8">
 		<title>스타벅스</title>
 		<link href="<c:url value='/css/popup.css'/>" rel="stylesheet">
+		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
 	</head>
 	<body>
 		<div>
-			<h1>스타벅스(f)에 오신걸 환영합니다!</h1>
+			<h1>스타벅스(a)에 오신걸 환영합니다!</h1>
 		</div>
-		<c:if test="${ null eq sessionScope.userName }">
+		<div id="divLogin">
+			<form id="frmLogin" method="post" action="<c:url value='/login.star'/>">
+				<input type="text" name="userId" id="userId" placeholder="아이디"><br>
+				<input type="text" name="userPw" id="userPw" placeholder="암호"><br>
+				<input type="button" id="btnLogin" value="로그인">
+			</form>
+		</div>
+		<div id="divMenu">
 			<div>
-				<span style="color:red">${msg }</span>
-			</div>
-			<div>
-				<form id="frmLogin" method="post" action="<c:url value='/login.star'/>">
-					<input type="text" name="userId" id="userId" placeholder="아이디"><br>
-					<input type="text" name="userPw" id="userPw" placeholder="암호"><br>
-					<input type="button" id="btnLogin" value="로그인">
-				</form>
-			</div>
-		</c:if>
-		<c:if test="${ null ne sessionScope.userName }">
-			<div>
-				<span>${sessionScope.userName }님 </span>
+				<span id="spanUserName">${sessionScope.userName }님 </span>
 				<span>
 					<input type="button" id="btnLogout" value="로그아웃">
 				</span>
@@ -38,8 +34,7 @@
 					<li><a href="<c:url value='/file/main.star'/>">파일</a></li>
 				</ul>
 			</div>
-		</c:if>
-		
+		</div>
 		<!-- https://chlolisher.tistory.com/100 -->
 		<div id="popup_layer" style="display: none">
 		  <div class="popup_box">
@@ -65,7 +60,27 @@
 			let btnLogin = document.getElementById('btnLogin');
 			if ( null != btnLogin ) {
 				btnLogin.addEventListener('click',function(){
-					document.getElementById('frmLogin').submit();
+					let userId = $('#userId').val();
+					let userPw = $('#userPw').val();
+					$.ajax({
+					  method: "POST",
+					  url: "<c:url value='/loginA.star'/>",
+					  data: { 
+						  userId: userId
+						  ,userPw: userPw
+						  }
+					}).done(function(userName) {
+						console.log(userName);
+						if ( '' != userName ) {
+							$('#spanUserName').html(userName + '님');
+							$('#divMenu').css('display','block');
+							$('#divLogin').css('display','none');
+						} else {
+							alert('아이디와 비밀번호를 다시 확인해 주세요.');
+						 	$('#divMenu').css('display','none');
+						 	$('#divLogin').css('display','block');
+						}
+					});
 				});
 			}
 			let btnLogout = document.getElementById('btnLogout');
@@ -90,6 +105,17 @@
 				document.getElementById("imgBlackFridayGift").src
 				= "<c:url value='/images/cookie/" + blackFridayGift + ".png'/>"
 			}
+			
+			$(function(){
+				let userName = '<c:out value="${sessionScope.userName}"/>';
+				if ( '' != userName ) {
+					$('#divMenu').css('display','block');
+					$('#divLogin').css('display','none');
+				} else {
+				 	$('#divMenu').css('display','none');
+				 	$('#divLogin').css('display','block');
+				}
+			});
 
 		</script>
 		

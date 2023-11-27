@@ -23,7 +23,7 @@ public class MainServlet extends HttpServlet {
 		if ( -1 < uri.indexOf("/index.star")) {
 			IndexController.service(req, res);
 		}
-		if ( -1 < uri.indexOf("/login.star")) {
+		if ( -1 < uri.indexOf("/login.star") || -1 < uri.indexOf("/loginA.star") ) {
 			LoginController.service(req, res);
 		}
 		if ( -1 < uri.indexOf("/logout.star")) {
