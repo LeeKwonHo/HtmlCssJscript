@@ -1,14 +1,13 @@
 package login.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import index.model.IndexModel;
 import login.model.LoginModel;
-import starbucks.model.StarbucksModel;
 
 public class LoginController {
 
@@ -23,7 +22,11 @@ public class LoginController {
 		
 		//ajax 로그인
 		if ( -1 < uri.indexOf("/loginA.star") ) {
-			res.getWriter().print(LoginModel.loginA(req, res));
+			PrintWriter out = res.getWriter();
+			res.setContentType("application/json");
+			res.setCharacterEncoding("UTF-8");
+			out.print(LoginModel.loginA(req, res));
+			out.flush();
 		}
 		
 		if ( -1 < uri.indexOf("/logout.star") ) {

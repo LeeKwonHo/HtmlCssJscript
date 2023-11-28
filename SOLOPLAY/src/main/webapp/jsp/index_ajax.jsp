@@ -15,27 +15,32 @@
 		<h1>스타벅스(a)에 오신걸 환영합니다!</h1>
 	</div>
 	<div id="divLogin">
+
 		<form id="frmLogin" method="post" action="<c:url value='/login.star'/>">
 			<input type="text" name="userId" id="userId" placeholder="아이디">
 			<br>
 			<input type="text" name="userPw" id="userPw" placeholder="암호">
 			<br>
 			<input type="button" id="btnLogin" value="로그인">
+
 		</form>
 	</div>
 	<div id="divMenu">
+
 		<div>
 			<span id="spanUserName">${sessionScope.userName }님 </span>
 			<span>
 				<input type="button" id="btnLogout" value="로그아웃">
 			</span>
 		</div>
+
 		<div>
 			<ul>
 				<li><a href="<c:url value='/starbucks/menu.star'/>">메뉴</a></li>
 				<li><a href="<c:url value='/file/main.star'/>">파일</a></li>
 			</ul>
 		</div>
+
 	</div>
 	<!-- https://chlolisher.tistory.com/100 -->
 	<div id="popup_layer" style="display: none">
@@ -60,12 +65,15 @@
 
 	<script>
 		let btnLogin = document.getElementById('btnLogin');
+
 		if (null != btnLogin) {
 			btnLogin.addEventListener('click', function() {
+
 				let userId = $('#userId').val();
 				let userPw = $('#userPw').val();
 
 				let json = new Object();
+
 				json.param = new Object();
 				json.param.userId = userId;
 				json.param.userPw = userPw;
@@ -75,20 +83,26 @@
 					url : "<c:url value='/loginA.star'/>",
 					data : JSON.stringify(json),
 					contentType : "application/json"
-				}).done(function(userName) {
-					console.log(userName);
-					if ('' != userName) {
-						$('#spanUserName').html(userName + '님');
+				}).done(function(json) {
+					
+					//JSON.parse() : json String으로 받은 경우 변환 필요
+					if (1 == json.resultCode) {
+
+						$('#spanUserName').html(json.data.userName + '님');
 						$('#divMenu').css('display', 'block');
 						$('#divLogin').css('display', 'none');
+
 					} else {
+
 						alert('아이디와 비밀번호를 다시 확인해 주세요.');
 						$('#divMenu').css('display', 'none');
 						$('#divLogin').css('display', 'block');
+
 					}
 				});
 			});
 		}
+
 		let btnLogout = document.getElementById('btnLogout');
 		if (null != btnLogout) {
 			btnLogout.addEventListener('click', function() {

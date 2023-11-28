@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
@@ -30,17 +31,35 @@ public class LoginModel {
 	// ajax 로그인
 	public static String loginA(HttpServletRequest req, HttpServletResponse res)
 			throws JsonSyntaxException, JsonIOException, IOException {
-		String userName = "";
+
+		JsonObject returnJson = null;
 		JsonObject json = new Gson().fromJson(req.getReader(), JsonObject.class);
 		System.out.println(json);
-//		String userId = req.getParameter("userId");
-//		String userPw = req.getParameter("userPw");
-//		if ( "hongkd".equals(userId) && "1234".equals(userPw) ) {
-//			userName = "hongkd";
-//			req.getSession().setAttribute("userName",userName);
-//			CookieMaker.makeCookie(res);
-//		}
-		return userName;
+
+		JsonObject paramJson = (JsonObject) json.get("param");
+
+		String userId = paramJson.get("userId").getAsString();
+		String userPw = paramJson.get("userPw").getAsString();
+
+		if ("hongkd".equals(userId) && "1234".equals(userPw)) {
+
+			req.getSession().setAttribute("userName", userId);
+			CookieMaker.makeCookie(res);
+
+			returnJson = new JsonObject();
+			JsonObject jo = new JsonObject();
+			
+			returnJson.addProperty("resultCode", "1");
+			jo.addProperty("userName", userId);
+			returnJson.add("data", jo);
+			
+		} else {
+			
+			returnJson = new JsonObject();
+			returnJson.addProperty("resultCode", "0");
+		}
+
+		return new Gson().toJson(returnJson);
 	}
 
 	public static void logout(HttpServletRequest req, HttpServletResponse res) {
