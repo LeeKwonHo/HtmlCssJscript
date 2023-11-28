@@ -19,16 +19,19 @@
 		</div>
 		<div>
 			<form id="frmLogin" method="post" action="<c:url value='/login.star'/>">
-				<input type="text" name="userId" id="userId" placeholder="아이디"><br> 
-				<input type="text" name="userPw" id="userPw" placeholder="암호"><br> 
+				<input type="text" name="userId" id="userId" placeholder="아이디">
+				<br>
+				<input type="text" name="userPw" id="userPw" placeholder="암호">
+				<br>
 				<input type="button" id="btnLogin" value="로그인">
 			</form>
 		</div>
 	</c:if>
 	<c:if test="${ null ne sessionScope.userName }">
 		<div>
-			<span>${sessionScope.userName }님 </span> 
-			<span> <input type="button" id="btnLogout" value="로그아웃">
+			<span>${sessionScope.userName }님 </span>
+			<span>
+				<input type="button" id="btnLogout" value="로그아웃">
 			</span>
 		</div>
 		<div>
@@ -45,7 +48,8 @@
 			<!--팝업 컨텐츠 영역-->
 			<div class="popup_cont">
 				<h2>BlackFridayGift</h2>
-				<span> <img style="width: 50%" id="imgBlackFridayGift">
+				<span>
+					<img style="width: 50%" id="imgBlackFridayGift">
 				</span>
 			</div>
 			<!--팝업 버튼 영역-->
