@@ -30,7 +30,8 @@
 			</div>
 			<div>
 				<ul>
-					<li><a href="<c:url value='/starbucks/menu.star'/>">메뉴</a></li>
+					<li><a href="<c:url value='/starbucks/menu.star'/>">주문하기</a></li>
+					<li><a href="<c:url value='/starbucks/orderList.star'/>">주문조회</a></li>
 					<li><a href="<c:url value='/file/main.star'/>">파일</a></li>
 				</ul>
 			</div>

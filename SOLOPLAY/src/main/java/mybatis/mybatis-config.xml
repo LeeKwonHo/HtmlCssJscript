@@ -19,5 +19,6 @@
   </environments>
   <mappers>
     <mapper resource="mybatis/mapper/city_mapper.xml"/>
+    <mapper resource="mybatis/mapper/order_info_mapper.xml"/>
   </mappers>
 </configuration>
