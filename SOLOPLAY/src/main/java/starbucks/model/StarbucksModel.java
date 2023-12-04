@@ -19,16 +19,16 @@ import mybatis.factory.SigletonSessionFactory;
 import starbucks.dao.OrderInfoMapper;
 
 public class StarbucksModel {
-	
+
 	public static String checkStock(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 		JsonObject returnJson = null;
 		JsonObject json = new Gson().fromJson(req.getReader(), JsonObject.class);
 		System.out.println(json);
-		JsonObject paramJson= (JsonObject)json.get("param");
+		JsonObject paramJson = (JsonObject) json.get("param");
 		String menu = paramJson.get("menu").getAsString();
 		String amount = paramJson.get("amount").getAsString();
-		if ( "coffee".equals(menu) ) {
-			if ( 50 < Integer.parseInt(amount) ) {
+		if ("coffee".equals(menu)) {
+			if (50 < Integer.parseInt(amount)) {
 				returnJson = new JsonObject();
 				returnJson.addProperty("resultCode", "0");
 				JsonObject jo = new JsonObject();
@@ -44,7 +44,7 @@ public class StarbucksModel {
 		}
 		return new Gson().toJson(returnJson);
 	}
-	
+
 	public static void makeFood(HttpServletRequest req) throws IOException {
 		String menu = req.getParameter("menu");
 		String amount = req.getParameter("amount");
@@ -66,24 +66,23 @@ public class StarbucksModel {
 			map.put("sum", sum);
 			map.put("user_id", req.getSession().getAttribute("userName"));
 			int result = mapper.insertOrderInfo(map);
-			if ( 1 == result ) {
+			if (1 == result) {
 				session.commit();
 			}
 		}
-		
+
 		req.setAttribute("menu", menu);
 		req.setAttribute("amount", Integer.parseInt(amount));
 		req.setAttribute("sum", String.valueOf(sum));
 	}
 
-	
 	public static void selectOrderList(HttpServletRequest req) throws IOException {
 		String menu = req.getParameter("menu");
-		if ( "".equals(menu) ) {
+		if ("".equals(menu)) {
 			menu = null;
 		}
 		String user_id = req.getParameter("user_id");
-		if ( "".equals(user_id) ) {
+		if ("".equals(user_id)) {
 			user_id = null;
 		}
 		try (SqlSession session = SigletonSessionFactory.getSqlSessionFactory().openSession(false)) {
